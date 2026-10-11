@@ -1,0 +1,34 @@
+{
+	"FileVersion": 3,
+	"Version": 1,
+	"VersionName": "1.0",
+	"FriendlyName": "Space Cowboys Characters",
+	"Description": "Entity subsystem of the Space Cowboys gunslingers: one DataAsset per race, one gunslinger description per array element, IDs registered as native gameplay tags (Gunslinger.<Asset>.<Index>).",
+	"Category": "FantasyStore",
+	"CreatedBy": "DenKuzn",
+	"CreatedByURL": "",
+	"DocsURL": "",
+	"MarketplaceURL": "",
+	"SupportURL": "",
+	"CanContainContent": true,
+	"IsBetaVersion": false,
+	"IsExperimentalVersion": false,
+	"Installed": false,
+	"Modules": [
+		{
+			"Name": "SpaceCowboysCharacters",
+			"Type": "Runtime",
+			"LoadingPhase": "Default"
+		}
+	],
+	"Plugins": [
+		{
+			"Name": "AssertUtils",
+			"Enabled": true
+		},
+		{
+			"Name": "TypeObjectSubsystems",
+			"Enabled": true
+		}
+	]
+}

@@ -1,0 +1,19 @@
+# Unreal Engine build and editor artifacts
+Binaries/
+Intermediate/
+Saved/
+DerivedDataCache/
+Build/
+Plugins/*/Binaries/
+Plugins/*/Intermediate/
+
+# IDE
+.vs/
+.idea/
+*.sln
+*.slnx
+*.DotSettings.user
+
+# Perforce
+.p4ignore
+p4config.txt

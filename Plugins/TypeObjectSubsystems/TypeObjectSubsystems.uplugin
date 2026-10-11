@@ -1,0 +1,30 @@
+{
+	"FileVersion": 3,
+	"Version": 1,
+	"VersionName": "1.0",
+	"FriendlyName": "Type Object Subsystems",
+	"Description": "Base layer of the Type Object Subsystems pattern (UTOS): description and entity subsystem bases (the entity base also resolves any entity ID to its owner), entity database data asset base, native gameplay tag bundles, TagID data asset base and the enhanced asset manager. Project-agnostic; depends only on AssertUtils.",
+	"Category": "Gameplay",
+	"CreatedBy": "DenKuzn",
+	"CreatedByURL": "",
+	"DocsURL": "",
+	"MarketplaceURL": "",
+	"SupportURL": "",
+	"CanContainContent": false,
+	"IsBetaVersion": false,
+	"IsExperimentalVersion": false,
+	"Installed": false,
+	"Modules": [
+		{
+			"Name": "TypeObjectSubsystems",
+			"Type": "Runtime",
+			"LoadingPhase": "Default"
+		}
+	],
+	"Plugins": [
+		{
+			"Name": "AssertUtils",
+			"Enabled": true
+		}
+	]
+}

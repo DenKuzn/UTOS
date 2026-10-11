@@ -1,0 +1,71 @@
+{
+	"FileVersion": 3,
+	"EngineAssociation": "5.8",
+	"Category": "",
+	"Description": "",
+	"Modules": [
+		{
+			"Name": "FantasyStore",
+			"Type": "Runtime",
+			"LoadingPhase": "Default"
+		}
+	],
+	"Plugins": [
+		{
+			"Name": "ModelingToolsEditorMode",
+			"Enabled": true,
+			"TargetAllowList": [
+				"Editor"
+			]
+		},
+		{
+			"Name": "ModelContextProtocol",
+			"Enabled": true
+		},
+		{
+			"Name": "AllToolsets",
+			"Enabled": true,
+			"TargetAllowList": [
+				"Editor"
+			]
+		},
+		{
+			"Name": "AssertUtils",
+			"Enabled": true
+		},
+		{
+			"Name": "TypeObjectSubsystems",
+			"Enabled": true
+		},
+		{
+			"Name": "MyExtension",
+			"Enabled": true,
+			"Optional": true
+		},
+		{
+			"Name": "ObjectDescriptionPlugin",
+			"Enabled": true
+		},
+		{
+			"Name": "CatUI",
+			"Enabled": true,
+			"Optional": true
+		},
+		{
+			"Name": "EntityAppearance",
+			"Enabled": true
+		},
+		{
+			"Name": "SpaceCowboysCharacters",
+			"Enabled": true
+		},
+		{
+			"Name": "MCPCustomToolSet",
+			"Enabled": true,
+			"Optional": true,
+			"TargetAllowList": [
+				"Editor"
+			]
+		}
+	]
+}

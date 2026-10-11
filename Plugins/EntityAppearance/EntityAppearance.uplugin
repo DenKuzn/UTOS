@@ -1,0 +1,30 @@
+{
+	"FileVersion": 3,
+	"Version": 1,
+	"VersionName": "1.0",
+	"FriendlyName": "Entity Appearance",
+	"Description": "Facet subsystem: how any visible entity looks — the place of the game's visual part (for now an optional soft model reference), keyed by the entity ID (Docs/Entities.md §Идентичность, Внешность).",
+	"Category": "FantasyStore",
+	"CreatedBy": "DenKuzn",
+	"CreatedByURL": "",
+	"DocsURL": "",
+	"MarketplaceURL": "",
+	"SupportURL": "",
+	"CanContainContent": true,
+	"IsBetaVersion": false,
+	"IsExperimentalVersion": false,
+	"Installed": false,
+	"Modules": [
+		{
+			"Name": "EntityAppearance",
+			"Type": "Runtime",
+			"LoadingPhase": "Default"
+		}
+	],
+	"Plugins": [
+		{
+			"Name": "TypeObjectSubsystems",
+			"Enabled": true
+		}
+	]
+}
