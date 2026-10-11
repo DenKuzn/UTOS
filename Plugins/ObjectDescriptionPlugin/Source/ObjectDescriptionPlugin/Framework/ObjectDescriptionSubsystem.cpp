@@ -15,7 +15,7 @@ TSubclassOf<UFacetDataAsset_Base> UObjectDescriptionSubsystem::GetDataAssetClass
 	return UObjectDescriptionDataAsset::StaticClass();
 }
 
-const FObjectDescription& UObjectDescriptionSubsystem::GetObjectDescription(FGameplayTag ObjectTag) const
+const FObjectDescription& UObjectDescriptionSubsystem::GetObjectDescription(const FGameplayTag& ObjectTag) const
 {
 	assertGameplayTagIsValid_return( ObjectTag, FObjectDescription::EmptyData );
 

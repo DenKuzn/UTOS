@@ -269,7 +269,7 @@ FName UEntityDataAsset_Base::ComposeAssetTagIDName() const
 	return FName(AssetTagIDString);
 }
 
-void UEntityDataAsset_Base::RegisterKeysAsNativeGameplayTags(TConstArrayView<FGameplayTag> Keys) const
+void UEntityDataAsset_Base::RegisterKeysAsNativeGameplayTags(const TConstArrayView<FGameplayTag>& Keys) const
 {
 	const FName AssetTagIDName = ComposeAssetTagIDName();
 	assertNameIsAssigned_return(AssetTagIDName);
@@ -572,7 +572,7 @@ FGameplayTag UEntityDataAsset_Base::GetAssetTagID() const
 	return UGameplayTagsManager::Get().RequestGameplayTag(AssetTagIDName, /*ErrorIfNotFound*/ false);
 }
 
-void UEntityDataAsset_Base::RegisterAllIDsOfClass(const TSubclassOf<UEntityDataAsset_Base> DataAssetClass)
+void UEntityDataAsset_Base::RegisterAllIDsOfClass(const TSubclassOf<UEntityDataAsset_Base>& DataAssetClass)
 {
 	assertUObjectPointerIsValid_return(DataAssetClass);
 
@@ -616,7 +616,7 @@ void UEntityDataAsset_Base::RegisterAllIDsOfClass(const TSubclassOf<UEntityDataA
 	TagsManager.PopDeferOnGameplayTagTreeChangedBroadcast();
 }
 
-void UEntityDataAsset_Base::RegisterAllIDsOfClassOnNativeTagsAdding(const TSubclassOf<UEntityDataAsset_Base> DataAssetClass)
+void UEntityDataAsset_Base::RegisterAllIDsOfClassOnNativeTagsAdding(const TSubclassOf<UEntityDataAsset_Base>& DataAssetClass)
 {
 	assertUObjectPointerIsValid_return(DataAssetClass);
 

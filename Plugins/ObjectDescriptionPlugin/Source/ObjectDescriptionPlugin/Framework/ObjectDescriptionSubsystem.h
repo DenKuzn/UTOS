@@ -21,7 +21,7 @@ protected:
 
 public:
 
-	const FObjectDescription& GetObjectDescription(FGameplayTag ObjectTag) const;
+	const FObjectDescription& GetObjectDescription(const FGameplayTag& ObjectTag) const;
 
 
 };

@@ -93,7 +93,7 @@ private:
 	 * Registers every key that lies in this DA's namespace ([DA tag ID].*) as a native gameplay tag; logs and skips the rest.
 	 * @param Keys The keys of one of the DA's maps.
 	 */
-	void RegisterKeysAsNativeGameplayTags(TConstArrayView<FGameplayTag> Keys) const;
+	void RegisterKeysAsNativeGameplayTags(const TConstArrayView<FGameplayTag>& Keys) const;
 
 #if WITH_EDITOR
 	/**
@@ -162,7 +162,7 @@ public:
 	 * first registers the class's native tags so the root exists. Safe to call again: a DA registers once.
 	 * @param DataAssetClass The DA class of an entity subsystem.
 	 */
-	static void RegisterAllIDsOfClass(const TSubclassOf<UEntityDataAsset_Base> DataAssetClass);
+	static void RegisterAllIDsOfClass(const TSubclassOf<UEntityDataAsset_Base>& DataAssetClass);
 
 	/**
 	 * Runs RegisterAllIDsOfClass when native gameplay tags are added: at the end of engine start-up, or at the end of the current
@@ -171,5 +171,5 @@ public:
 	 * is unsafe, the engine is not initialized yet.
 	 * @param DataAssetClass The DA class of an entity subsystem.
 	 */
-	static void RegisterAllIDsOfClassOnNativeTagsAdding(const TSubclassOf<UEntityDataAsset_Base> DataAssetClass);
+	static void RegisterAllIDsOfClassOnNativeTagsAdding(const TSubclassOf<UEntityDataAsset_Base>& DataAssetClass);
 };

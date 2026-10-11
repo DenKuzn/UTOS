@@ -73,7 +73,7 @@ protected:
 
 	/** Replaces underscores with dots in the tag name and registers the result via
 	 *  UGameplayTagsManager::AddNativeGameplayTag. */
-	static void AddTag(FGameplayTag& OutTag, FString StringTagName, const FString& TagComment);
+	static void AddTag(FGameplayTag& OutTag, const FString& StringTagName, const FString& TagComment);
 
 // ============================================================
 // Public Interface

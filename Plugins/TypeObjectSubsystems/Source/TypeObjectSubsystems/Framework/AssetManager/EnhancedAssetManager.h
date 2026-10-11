@@ -30,10 +30,10 @@ public:
 public:
 
 	template <class Type>
-	void AsyncLoadAsset(TSoftObjectPtr<Type> SoftObjectPtr,
+	void AsyncLoadAsset(const TSoftObjectPtr<Type>& SoftObjectPtr,
 						Type** Outer,
-						FStreamableDelegate OnLoadedObjectDelegate,
-						FString AssetNameForDebug = "UnknownAssetType")
+						const FStreamableDelegate& OnLoadedObjectDelegate,
+						const FString& AssetNameForDebug = "UnknownAssetType")
 	{
 		assertIsNotNull_return( Outer );
 
@@ -50,20 +50,27 @@ public:
 
 		if ( SoftObjectPtr.IsPending() )
 		{
-			TSharedPtr<FStreamableHandle> NewStreambleHandle;
-			FStreamableDelegate OnLoaded;
-			OnLoaded.BindLambda( [this, &TempOutHandle = NewStreambleHandle, &Outer = *Outer, &OnLoadedObjectDelegate = OnLoadedObjectDelegate]()
-			{
-				HandleLoadedAsset( TempOutHandle, &Outer, OnLoadedObjectDelegate );
-			} );
 			UEnhancedAssetManager* const EnhancedAssetManager = Get();
-			assertUObjectPointerIsValid_return( EnhancedAssetManager );
+			assertUObjectPointerIsValid_ignore( EnhancedAssetManager );
 
-			NewStreambleHandle = EnhancedAssetManager->GetStreamableManager().RequestAsyncLoad( SoftObjectPtr.ToSoftObjectPath(), OnLoaded );
-			return;
+			if ( ::IsValid( EnhancedAssetManager ) )
+			{
+				// the load finishes after this function returns: the callback holds copies, never references to this frame;
+				// the handle comes from the streamable manager, which keeps it alive while loading. *Outer must outlive the load
+				const FStreamableDelegateWithHandle OnLoaded = FStreamableDelegateWithHandle::CreateLambda(
+					[this, Outer, OnLoadedObjectDelegate](const TSharedPtr<FStreamableHandle>& LoadedHandle)
+					{
+						HandleLoadedAsset( LoadedHandle, Outer, OnLoadedObjectDelegate );
+					} );
+
+				EnhancedAssetManager->GetStreamableManager().RequestAsyncLoad( SoftObjectPtr.ToSoftObjectPath(), OnLoaded );
+				return;
+			}
 		}
-
-		assertNeverReached_ignore();
+		else
+		{
+			assertNeverReached_ignore();
+		}
 
 		// the caller still waits for the delegate
 		OnLoadedObjectDelegate.ExecuteIfBound();
@@ -71,7 +78,7 @@ public:
 
 
 	template <typename AssetType>
-	static void LoadAsyncPrimaryDataAssets(TDelegate<void(TArray<AssetType*>)> OnAssetsLoadedDelegate)
+	static void LoadAsyncPrimaryDataAssets(const TDelegate<void(const TArray<AssetType*>&)>& OnAssetsLoadedDelegate)
 	{
 		const FString AssetName = AssetType::StaticClass()->GetName();
 		const FPrimaryAssetType DataAssetType = FPrimaryAssetType{AssetType::StaticClass()->GetFName()};
@@ -144,15 +151,14 @@ public:
 private:
 
 	template <class Type>
-	void HandleLoadedAsset(TSharedPtr<FStreamableHandle>& StreamableHandle,
+	void HandleLoadedAsset(const TSharedPtr<FStreamableHandle>& StreamableHandle,
 	                       Type** Outer,
-	                       FStreamableDelegate OnLoadedObjectDelegate)
+	                       const FStreamableDelegate& OnLoadedObjectDelegate)
 	{
 		assertSmartPointerIsValid_return( StreamableHandle );
 		assertIsNotNull_return( Outer );
 
 		*Outer = Cast<Type>( StreamableHandle->GetLoadedAsset() );
-		StreamableHandle.Reset();
 		OnLoadedObjectDelegate.ExecuteIfBound();
 
 		UE_LOG( LogTemp, Error, TEXT("%s(). Is Valid Bullet: %s"), *FString(__FUNCTION__), TEXT_TRUE_FALSE( ::IsValid( *Outer ) ) );

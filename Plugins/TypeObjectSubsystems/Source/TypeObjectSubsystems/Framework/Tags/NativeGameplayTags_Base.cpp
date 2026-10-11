@@ -62,11 +62,11 @@ void FNativeGameplayTags_Base::RegisterTags() const
 	assertDefaultImplementationIsOverriden_return();
 }
 
-void FNativeGameplayTags_Base::AddTag(FGameplayTag& OutTag, FString StringTagName, const FString& TagComment)
+void FNativeGameplayTags_Base::AddTag(FGameplayTag& OutTag, const FString& StringTagName, const FString& TagComment)
 {
 	assertStringIsNotEmpty_return(StringTagName);
 
-	StringTagName = StringTagName.Replace(TEXT("_"), TEXT("."));
-	OutTag = UGameplayTagsManager::Get().AddNativeGameplayTag(FName(StringTagName), FString(TEXT("(Native) " + TagComment)));
+	const FString DottedTagName = StringTagName.Replace(TEXT("_"), TEXT("."));
+	OutTag = UGameplayTagsManager::Get().AddNativeGameplayTag(FName(DottedTagName), FString(TEXT("(Native) " + TagComment)));
 	assertGameplayTagIsValid_return(OutTag);
 }
